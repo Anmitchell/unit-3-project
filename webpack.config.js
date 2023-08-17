@@ -1,15 +1,15 @@
-const path = require('path')
+const path = require('path');
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 
 module.exports = env => {
 	return {
 		entry: {
-			App: './src/index.js'
-			//main: './src/main.js'
+			App: './src/index.js',
+			main: './src/main.js'
 		},
 		output: {
 			path: path.resolve(__dirname, 'public/js/dist'),
@@ -74,5 +74,5 @@ module.exports = env => {
 			usedExports: true,
 			sideEffects: true
 		}
-	}
-}
+	};
+};

@@ -21,3 +21,5 @@ export default async function sendRequest(url, method = 'GET', payload = null) {
   if (res.ok) return res.json()
   throw new Error('Bad Request')
 }
+
+// 🌝 set up a post request for guest that adds a guest when visitor views page

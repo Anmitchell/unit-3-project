@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import styles from './App.module.scss'
 import { getUser } from '../../utilities/users-service'
+import { createGuest } from '../../utilities/users-api'
 
 // Components
 import AuthPage from '../AuthPage/AuthPage'
@@ -15,6 +16,41 @@ authentication status and navigates users to different pages accordingly. */
 
 export default function App() {
   const [user, setUser] = useState(getUser()) // gets user and stores in in user state
+
+  // useEffect needed here to create a user
+  useEffect(() => {
+    /*
+  * 1. Generate random email
+  * 2. Set name to guest
+  * 3. Assign a default password
+  * 4. Make an api request to create a user
+  * 5. set the user to the guest
+  */
+
+    // Generate random alphanumeric string of length 8.
+    function generateRandomEmail() {
+      const randomString = Math.random().toString(36).substring(2, 10);
+      const emailDomain = 'email.com'; // Replace this with your desired domain
+
+      const randomEmail = `${randomString}@${emailDomain}`; // combine strings to form email
+      return randomEmail;
+    }
+
+
+    async function addGuest() {
+      const guest = {}
+      guest.name = 'guest'
+      guest.email = generateRandomEmail()
+      guest.password = '12345'
+      await createGuest(guest).then((token) => {
+        const user = JSON.parse(atob(token.split('.')[1])).user
+        setUser(user)
+        localStorage.setItem('token', token)
+      })
+    }
+    addGuest()
+  }, [])
+
   return (
     <main className={styles.App}>
       { user ?
