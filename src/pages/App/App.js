@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import styles from './App.module.scss'
 import { getUser } from '../../utilities/users-service'
 import { createGuest } from '../../utilities/users-api'
+import Navbar from '../../components/Navbar/Navbar'
 
 // Components
 import AuthPage from '../AuthPage/AuthPage'
@@ -17,16 +18,7 @@ authentication status and navigates users to different pages accordingly. */
 export default function App() {
   const [user, setUser] = useState(getUser()) // gets user and stores in in user state
 
-  // useEffect needed here to create a user
   useEffect(() => {
-    /*
-  * 1. Generate random email
-  * 2. Set name to guest
-  * 3. Assign a default password
-  * 4. Make an api request to create a user
-  * 5. set the user to the guest
-  */
-
     // Generate random alphanumeric string of length 8.
     function generateRandomEmail() {
       const randomString = Math.random().toString(36).substring(2, 10);
@@ -53,8 +45,6 @@ export default function App() {
 
   return (
     <main className={styles.App}>
-      { user ?
-        <>
           <Routes>
             {/* client-side route that renders the component instance if the path matches the url in the address bar */}
             <Route path="/orders/new" element={<NewOrderPage user={user} setUser={setUser} />} />
@@ -62,10 +52,6 @@ export default function App() {
             {/* redirect to /orders/new if path in address bar hasn't matched a <Route> above */}
             <Route path="/*" element={<Navigate to="/orders/new" />} />
           </Routes>
-        </>
-        :
-        <AuthPage setUser={setUser} />
-      }
     </main>
   )
 }

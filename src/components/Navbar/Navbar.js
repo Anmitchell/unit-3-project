@@ -1,6 +1,7 @@
-import styles from './CategoryList.module.scss'
+import styles from './Navbar.module.scss'
+import Logo from '../Logo/Logo'
 
-export default function CategoryList({ categories, activeCat, setActiveCat }) {
+export default function Navbar({ categories, activeCat, setActiveCat }) {
   const cats = categories.map(cat =>
     <li
       key={cat}
@@ -13,8 +14,11 @@ export default function CategoryList({ categories, activeCat, setActiveCat }) {
     </li>
   )
   return (
-    <ul className={styles.CategoryList}>
-      {cats}
-    </ul>
+    <nav className={styles.nav}>
+      <Logo />
+      <ul>
+        {cats}
+      </ul>
+    </nav>
   )
 }

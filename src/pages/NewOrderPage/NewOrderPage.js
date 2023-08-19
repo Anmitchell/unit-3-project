@@ -3,11 +3,10 @@ import * as itemsAPI from '../../utilities/items-api';
 import * as ordersAPI from '../../utilities/orders-api';
 import styles from './NewOrderPage.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../../components/Logo/Logo';
 import MenuList from '../../components/MenuList/MenuList';
-import CategoryList from '../../components/CategoryList/CategoryList';
 import OrderDetail from '../../components/OrderDetail/OrderDetail';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
+import Navbar from '../../components/Navbar/Navbar';
 
 export default function NewOrderPage({ user, setUser }) {
   const [menuItems, setMenuItems] = useState([]);
@@ -16,7 +15,7 @@ export default function NewOrderPage({ user, setUser }) {
   const categoriesRef = useRef([]);
   const navigate = useNavigate();
 
-  useEffect(function() {
+  useEffect(function () {
     async function getItems() {
       const items = await itemsAPI.getAll();
       categoriesRef.current = items.reduce((cats, item) => {
@@ -32,7 +31,7 @@ export default function NewOrderPage({ user, setUser }) {
       const cart = await ordersAPI.getCart();
       setCart(cart);
     }
-    
+
     getCart();
   }, []);
   // Providing an empty 'dependency array'
@@ -56,26 +55,27 @@ export default function NewOrderPage({ user, setUser }) {
   }
 
   return (
-    <main className={styles.NewOrderPage}>
-      <aside>
-        <Logo />
-        <CategoryList
+    <div className={styles.NewOrderPage}>
+      <header>
+        <Navbar
           categories={categoriesRef.current}
           cart={setCart}
           setActiveCat={setActiveCat}
         />
         <Link to="/orders" className="button btn-sm">PREVIOUS ORDERS</Link>
         <UserLogOut user={user} setUser={setUser} />
-      </aside>
-      <MenuList
-        menuItems={menuItems.filter(item => item.category.name === activeCat)}
-        handleAddToOrder={handleAddToOrder}
-      />
-      <OrderDetail
-        order={cart}
-        handleChangeQty={handleChangeQty}
-        handleCheckout={handleCheckout}
-      />
-    </main>
+      </header>
+      <main className={styles.main}>
+        <MenuList
+          menuItems={menuItems.filter(item => item.category.name === activeCat)}
+          handleAddToOrder={handleAddToOrder}
+        />
+        <OrderDetail
+          order={cart}
+          handleChangeQty={handleChangeQty}
+          handleCheckout={handleCheckout}
+        />
+      </main>
+    </div>
   );
 }
