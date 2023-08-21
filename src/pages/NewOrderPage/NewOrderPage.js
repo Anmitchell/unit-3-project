@@ -63,17 +63,19 @@ export default function NewOrderPage({ user, setUser }) {
           setActiveCat={setActiveCat}
         />
       </header>
-      <main className={styles.main}>
+      <div className={styles.mainContent}>
         <MenuList
+          className={styles.MenuList}
           menuItems={menuItems.filter(item => item.category.name === activeCat)}
           handleAddToOrder={handleAddToOrder}
         />
         <OrderDetail
+          classname={styles.OrderDetail}
           order={cart}
           handleChangeQty={handleChangeQty}
           handleCheckout={handleCheckout}
         />
-      </main>
+      </div>
     </div>
   );
 }
