@@ -10,8 +10,8 @@ export default function MenuList({ menuItems, handleAddToOrder }) {
     />
   );
   return (
-    <main className={styles.MenuList}>
+    <div className={styles.MenuList}>
       {items}
-    </main>
+    </div>
   );
 }

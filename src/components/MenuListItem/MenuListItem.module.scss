@@ -1,0 +1,39 @@
+.MenuListItem {
+    height: 50%;
+    width: 15%;
+    background-color: var(--grey);
+    border-radius: 5%;
+    font-size: 20px;
+}
+
+img {
+    height: 60%;
+    width: 100%;
+    border-radius: 5% 5% 0% 0%;
+}
+
+.menuContent {
+    height: 40%;
+}
+
+.name {
+    text-align: center;
+    font-weight: 800;
+}
+
+.description{
+    height: 40%;
+    width: 100%;
+    font-size: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buy {
+    width: 100%;
+    text-align: center;
+}
+

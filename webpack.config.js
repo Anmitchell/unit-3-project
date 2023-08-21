@@ -8,15 +8,15 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = env => {
 	return {
 		entry: {
-			App: './src/index.js',
-			main: './src/main.js'
+			App: './src/index.js'
 		},
 		output: {
 			path: path.resolve(__dirname, 'public/js/dist'),
 			filename: '[name].[contenthash].js', // '[name].[contenthash].js' put this if you want to get hashed files to cache bust
-			sourceMapFilename: "[name].[contenthash].js.map"
+			sourceMapFilename: process.env.NODE_ENV === 'dev' ? '[name].js.map' : "[name].[contenthash].js.map",
+			publicPath: '/js/dist'
 		},
-		devtool:"source-map",
+		devtool: "source-map",
 		module: {
 			rules: [
 				{
@@ -42,6 +42,13 @@ module.exports = env => {
 						'sass-loader',
 						'postcss-loader'
 					]
+				},
+				{
+					test: /\.(jpe?g|png|gif|svg)$/i, 
+					loader: 'file-loader',
+					options: {
+					  name: '/public/images/[name].[ext]'
+					}
 				}
 			]
 		},

@@ -16,7 +16,7 @@ export default function Navbar({ categories, activeCat, setActiveCat }) {
   return (
     <nav className={styles.nav}>
       <Logo />
-      <ul>
+      <ul className={styles.ul}>
         {cats}
       </ul>
     </nav>

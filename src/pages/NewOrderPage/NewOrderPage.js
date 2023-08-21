@@ -62,8 +62,6 @@ export default function NewOrderPage({ user, setUser }) {
           cart={setCart}
           setActiveCat={setActiveCat}
         />
-        <Link to="/orders" className="button btn-sm">PREVIOUS ORDERS</Link>
-        <UserLogOut user={user} setUser={setUser} />
       </header>
       <main className={styles.main}>
         <MenuList
@@ -79,3 +77,8 @@ export default function NewOrderPage({ user, setUser }) {
     </div>
   );
 }
+
+/* 
+   <Link to="/orders" className="button btn-sm">PREVIOUS ORDERS</Link>
+        <UserLogOut user={user} setUser={setUser} />
+*/
